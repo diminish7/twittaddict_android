@@ -69,7 +69,8 @@ public class Twitter {
 	// Data accessors
 	public static ArrayList<Long> getFriendIds(Context ctx) throws TwitterException, TwitterOAuthException, TwitterCommunicationException {
 		try {
-			JSONArray array = getJSONArray(FRIEND_URL, "friend list", ctx);
+			JSONObject object = getJSONObject(FRIEND_URL, "friend list", ctx);
+			JSONArray array = object.getJSONArray("ids");
 			ArrayList<Long> friendIds = new ArrayList<Long>();
 			for (int i=0; i < array.length(); i++) {
 				friendIds.add(array.getLong(i));
