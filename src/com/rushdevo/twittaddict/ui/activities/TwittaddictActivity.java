@@ -1,10 +1,11 @@
-package com.rushdevo.twittaddict;
+package com.rushdevo.twittaddict.ui.activities;
 
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.rushdevo.twittaddict.R;
 
 public class TwittaddictActivity extends SherlockActivity {
 
