@@ -8,19 +8,27 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Sherlock.Light" >
+        
         <activity
             android:name="com.rushdevo.twittaddict.ui.activities.TwittaddictActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>  
+				<action android:name="android.intent.action.VIEW"></action>  
+				<category android:name="android.intent.category.DEFAULT"></category>  
+				<category android:name="android.intent.category.BROWSABLE"></category>  
+				<data android:scheme="twittaddict" android:host="twitterauth"></data>  
+			</intent-filter>
         </activity>
     </application>
 

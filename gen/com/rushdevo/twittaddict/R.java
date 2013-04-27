@@ -1071,6 +1071,7 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f090009;
         public static final int app_name=0x7f09000f;
         public static final int exit=0x7f090010;
+        public static final int oauth_failure=0x7f090011;
     }
     public static final class style {
         /** 
