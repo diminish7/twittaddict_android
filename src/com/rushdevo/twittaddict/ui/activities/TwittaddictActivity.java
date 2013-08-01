@@ -1,5 +1,6 @@
 package com.rushdevo.twittaddict.ui.activities;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 	private UserDataSource userDataSource;
 	private HighScoreDataSource highScoreDataSource;
 	private FriendStatsDataSource friendStatsDataSource;
+	
+	private ProgressDialog progressDialog;
 
 	/////////// Activity Overrides ////////////////
 	
@@ -49,6 +52,7 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 		friendStatsDataSource.close();
 		
 		if (game.isInProgress()) game.pause();
+		if (progressDialog != null) progressDialog.dismiss();
 	}
 	
 	@Override
@@ -115,9 +119,19 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 		private Twittaddict game;
 		
 		@Override
+		protected void onPreExecute() {
+			String title = getResources().getString(R.string.loading_title);
+	    	String message = getResources().getString(R.string.loading_message);
+	    	progressDialog = ProgressDialog.show(TwittaddictActivity.this, title, message, true);
+		}
+		
+		@Override
 		protected Void doInBackground(Twittaddict... games) {
 			this.game = games[0];
 			game.authenticate();
+			if (game.isAuthenticated()) {
+				game.start();
+			}
 			return null;
 		}
 		
@@ -130,9 +144,9 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 					builder.append(error);
 				}
 				Toast.makeText(getBaseContext(), builder.toString(), Toast.LENGTH_LONG).show();
-			} else {
-				game.start();
 			}
+			progressDialog.dismiss();
+			progressDialog = null;
 		}
 	}
 }

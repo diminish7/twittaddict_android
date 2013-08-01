@@ -3,6 +3,8 @@ package com.rushdevo.twittaddict.twitter;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.http.HttpRequest;
+
 import oauth.signpost.AbstractOAuthConsumer;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthProvider;
@@ -48,6 +50,17 @@ public class Authenticator {
 		this.consumer = initializeConsumer();
 		this.provider = new CommonsHttpOAuthProvider(REQUEST_TOKEN_URL, ACCESS_TOKEN_URL, AUTHORIZATION_URL);
 		provider.setOAuth10a(true);
+	}
+	
+	/**
+	 * Signs an HTTP request with OAuth credentials
+	 * @param request The request to sign
+	 * @throws OAuthCommunicationException 
+	 * @throws OAuthExpectationFailedException 
+	 * @throws OAuthMessageSignerException 
+	 */
+	public void signRequest(HttpRequest request) throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
+		consumer.sign(request);
 	}
 	
 	/**
