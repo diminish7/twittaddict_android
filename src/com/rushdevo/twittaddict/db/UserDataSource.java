@@ -12,10 +12,10 @@ import com.rushdevo.twittaddict.db.model.User;
 public class UserDataSource {
 	public static final String USERS_TABLE_NAME = "users";
 	
-	public static final String USERS_TOKEN = "token";
 	public static final String USERS_TOKEN_SECRET = "token_secret";
+	public static final String USERS_TOKEN = "token";
 	
-	public static final String[] USER_COLUMNS = { _ID, USERS_TOKEN, USERS_TOKEN_SECRET };
+	public static final String[] USER_COLUMNS = { _ID, USERS_TOKEN_SECRET, USERS_TOKEN };
 	
 	public static final int ID_INDEX = 0;
 	public static final int TOKEN_SECRET_INDEX = 1;

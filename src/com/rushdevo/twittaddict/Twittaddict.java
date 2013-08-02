@@ -154,7 +154,7 @@ public class Twittaddict {
 	public boolean authenticate() {
 		this.errors.clear();
 		this.state = AUTHENTICATING;
-//		if (user == null) user = authenticator.authenticateFromDatabase();
+		if (user == null) user = authenticator.authenticateFromDatabase();
 		if (user == null) user = authenticator.authenticateFromTwitterResponse(gameView.getCurrentUri());
 		if (user == null) authenticator.authenticateFromTwitterRequest();
 		if (user != null) {
