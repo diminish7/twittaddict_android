@@ -21,14 +21,14 @@ import com.rushdevo.twittaddict.Twittaddict;
  */
 @SuppressLint("HandlerLeak")
 public class ClockFragment extends Fragment {
-	private TextView clock;
+	private TextView clockContainer;
 	private Timer timer;
 	private Twittaddict game;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.clock, container, false);
-		this.clock = (TextView)view.findViewById(R.id.clock);
+		this.clockContainer = (TextView)view.findViewById(R.id.clock_container);
 		return view;
 	}
 	
@@ -85,7 +85,7 @@ public class ClockFragment extends Fragment {
 		@Override
 		public void handleMessage(Message msg) {
 			Integer seconds = msg.what;
-			clock.setText(seconds.toString());
+			clockContainer.setText(seconds.toString());
 			if (seconds == 0) timer.cancel();
 			
 		}

@@ -43,9 +43,12 @@ public class Twittaddict {
 	
 	private List<String> errors;
 	
+	private List<GameChangeListener> gameChangeListeners;
+	
 	public Twittaddict(GameView gameView) {
 		this.gameView = gameView;
 		this.errors = new ArrayList<String>();
+		this.gameChangeListeners = new ArrayList<GameChangeListener>();
 		this.userDataSource = gameView.getUserDataSource();
 		this.context = this.gameView.getApplicationContext();
 		this.authenticator = new Authenticator(context, gameView);
@@ -104,6 +107,7 @@ public class Twittaddict {
 			this.state = IN_PROGRESS;
 			this.score = 0;
 			this.startTime = (System.currentTimeMillis() / 1000);
+			notifyGameChangeListeners();
 		} else {
 			error(context.getString(R.string.oauth_failure));
 		}
@@ -116,6 +120,7 @@ public class Twittaddict {
 	
 	public void complete() {
 		this.state = COMPLETE;
+		notifyGameChangeListeners();
 	}
 	
 	public void pause() {
@@ -132,6 +137,14 @@ public class Twittaddict {
 	
 	public Integer getScore() {
 		return this.score;
+	}
+	
+	/**
+	 * Registers a listener to be notified when something (like score) changes in the game
+	 * @param listener The listener to notify
+	 */
+	public void registerGameChangeListener(GameChangeListener listener) {
+		gameChangeListeners.add(listener);
 	}
 	
 	/**
@@ -190,5 +203,14 @@ public class Twittaddict {
 	private boolean queryStatuses() {
 		statuses = statusService.getHomeTimeline();
 		return (statuses != null && !statuses.isEmpty());
+	}
+	
+	/**
+	 * Notifies all listeners that the game has changed
+	 */
+	private void notifyGameChangeListeners() {
+		for (GameChangeListener listener : gameChangeListeners) {
+			listener.onGameChange(this);
+		}
 	}
 }

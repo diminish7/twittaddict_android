@@ -16,6 +16,7 @@ import com.rushdevo.twittaddict.db.HighScoreDataSource;
 import com.rushdevo.twittaddict.db.UserDataSource;
 import com.rushdevo.twittaddict.ui.GameView;
 import com.rushdevo.twittaddict.ui.fragments.ClockFragment;
+import com.rushdevo.twittaddict.ui.fragments.ScoreFragment;
 
 public class TwittaddictActivity extends SherlockFragmentActivity implements GameView {	
 	private Twittaddict game;
@@ -26,6 +27,7 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 	private ProgressDialog progressDialog;
 	
 	private ClockFragment clockFragment;
+	private ScoreFragment scoreFragment;
 
 	/////////// Activity Overrides ////////////////
 	
@@ -47,6 +49,9 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 		
 		clockFragment = (ClockFragment)getSupportFragmentManager().findFragmentById(R.id.clock_fragment);
 		clockFragment.setGame(game);
+		
+		scoreFragment = (ScoreFragment)getSupportFragmentManager().findFragmentById(R.id.score_fragment);
+		scoreFragment.setGame(game);
 	}
 	
 	@Override

@@ -10,4 +10,8 @@
     <string name="loading_message">Think you know your Twitter friends?\n\nMatch the Tweets to the Tweeters to find out!</string>
     
     <string name="start_time">60</string>
+    <string name="start_score">0</string>
+    
+    <string name="score">Score:</string>
+    <string name="correct">Correct!</string>
 </resources>
