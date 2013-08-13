@@ -978,20 +978,40 @@ containing a value of this type.
         public static final int abs__up=0x7f04000b;
         public static final int clock_container=0x7f040033;
         public static final int clock_fragment=0x7f040034;
-        public static final int correct_marker=0x7f040036;
+        public static final int correct_marker=0x7f040038;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
-        public static final int exit=0x7f040038;
+        public static final int exit=0x7f04004c;
         public static final int homeAsUp=0x7f040006;
         public static final int listMode=0x7f040002;
         public static final int normal=0x7f040001;
-        public static final int score_container=0x7f040037;
+        public static final int question_container=0x7f040037;
+        public static final int question_fragment=0x7f040036;
+        public static final int score_container=0x7f040039;
         public static final int score_fragment=0x7f040035;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int tabMode=0x7f040003;
+        public static final int three_users_container=0x7f04003c;
+        public static final int tweet1Container=0x7f040047;
+        public static final int tweet2Container=0x7f040048;
+        public static final int tweet3Container=0x7f040049;
+        public static final int tweet_container=0x7f04003b;
+        public static final int tweet_question_container=0x7f04003a;
         public static final int useLogo=0x7f040004;
+        public static final int user=0x7f04004a;
+        public static final int user1=0x7f04003e;
+        public static final int user1Container=0x7f04003d;
+        public static final int user1Name=0x7f04003f;
+        public static final int user2=0x7f040041;
+        public static final int user2Container=0x7f040040;
+        public static final int user2Name=0x7f040042;
+        public static final int user3=0x7f040044;
+        public static final int user3Container=0x7f040043;
+        public static final int user3Name=0x7f040045;
+        public static final int userName=0x7f04004b;
+        public static final int user_question_container=0x7f040046;
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {
@@ -1023,9 +1043,12 @@ containing a value of this type.
         public static final int abs__simple_dropdown_hint=0x7f030016;
         public static final int clock=0x7f030017;
         public static final int main=0x7f030018;
-        public static final int score=0x7f030019;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001a;
-        public static final int sherlock_spinner_item=0x7f03001b;
+        public static final int question=0x7f030019;
+        public static final int score=0x7f03001a;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
+        public static final int sherlock_spinner_item=0x7f03001c;
+        public static final int tweet_question=0x7f03001d;
+        public static final int user_question=0x7f03001e;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -1088,15 +1111,6 @@ containing a value of this type.
     }
     public static final class style {
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
@@ -1108,11 +1122,10 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f0a0059;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static final int AppTheme=0x7f0a005a;
+        public static final int AppBaseTheme=0x7f0a005d;
+        public static final int AvatarContainer=0x7f0a005a;
+        public static final int AvatarName=0x7f0a0059;
+        public static final int AvatarView=0x7f0a005b;
         public static final int DialogWindowTitle_Sherlock=0x7f0a0036;
         public static final int DialogWindowTitle_Sherlock_Light=0x7f0a0037;
         public static final int Sherlock___TextAppearance_Small=0x7f0a004a;
@@ -1155,6 +1168,7 @@ containing a value of this type.
         public static final int Theme_Sherlock_Light_Dialog=0x7f0a0058;
         public static final int Theme_Sherlock_Light_NoActionBar=0x7f0a0056;
         public static final int Theme_Sherlock_NoActionBar=0x7f0a0055;
+        public static final int TweetContainer=0x7f0a005c;
         public static final int Widget=0x7f0a0000;
         public static final int Widget_Sherlock_ActionBar=0x7f0a0002;
         public static final int Widget_Sherlock_ActionBar_Solid=0x7f0a0003;

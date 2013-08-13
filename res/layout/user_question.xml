@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"
+	android:id="@+id/user_question_container">
+	<TextView
+		android:id="@+id/tweet1Container"
+	    style="@style/TweetContainer" />
+	<TextView
+		android:id="@+id/tweet2Container"
+		style="@style/TweetContainer" />
+	<TextView
+		android:id="@+id/tweet3Container"
+	    style="@style/TweetContainer" />
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:gravity="bottom|center_horizontal">
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal">
+			<LinearLayout style="@style/AvatarContainer">
+				<ImageView
+					android:id="@+id/user"
+					style="@style/AvatarView"
+				/>
+				<TextView
+					android:id="@+id/userName"
+				    style="@style/AvatarName" />
+			</LinearLayout>
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

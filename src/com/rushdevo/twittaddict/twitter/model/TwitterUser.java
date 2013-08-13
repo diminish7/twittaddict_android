@@ -9,24 +9,23 @@ public class TwitterUser {
 	
 	/////// PROPERTIES ////////
 	
-	private String screenName;
+	private String screen_name;
 	private String name;
-	private String avatar;
-	private Drawable avatarImage;
+	private String profile_image_url;
+	private Drawable profileImage;
 	private String url;
 	private Long id;
 	private String description;
-	private Integer friendsCount;
-	private Integer statusesCount;
-	private boolean valid;
+	private Integer friends_count;
+	private Integer statuses_count;
 	
 	/////// GETTERS AND SETTERS /////
 	
 	public String getScreenName() {
-		return screenName;
+		return screen_name;
 	}
 	public void setScreenName(String screenName) {
-		this.screenName = screenName;
+		this.screen_name = screenName;
 	}
 	public String getName() {
 		return name;
@@ -34,20 +33,21 @@ public class TwitterUser {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAvatar() {
-		return avatar;
+	public String getProfileImageUrl() {
+		return profile_image_url;
 	}
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setProfileImageUrl(String profileImageUrl) {
+		this.profile_image_url = profileImageUrl;
 	}
-	public Drawable getAvatarImage() {
-		if (this.avatarImage == null) {
-			initializeDrawable();
-		}
-		return this.avatarImage;
+	public boolean hasProfileImage() {
+		return this.profileImage != null;
 	}
-	public void setAvatarImage(Drawable avatarImage) {
-		this.avatarImage = avatarImage;
+	public Drawable getProfileImage() {
+		if (!hasProfileImage()) initializeDrawable();
+		return this.profileImage;
+	}
+	public void setProfileImage(Drawable profileImage) {
+		this.profileImage = profileImage;
 	}
 	public String getUrl() {
 		return url;
@@ -68,33 +68,28 @@ public class TwitterUser {
 		this.description = description;
 	}
 	public Integer getFriendsCount() {
-		return friendsCount;
+		return friends_count;
 	}
 	public void setFriendsCount(Integer friendsCount) {
-		this.friendsCount = friendsCount;
+		this.friends_count = friendsCount;
 	}
 	public Integer getStatusesCount() {
-		return statusesCount;
+		return statuses_count;
 	}
 	public void setStatusesCount(Integer statusesCount) {
-		this.statusesCount = statusesCount;
-	}
-	public boolean isValid() {
-		return valid;
-	}
-	public void setValid(boolean valid) {
-		this.valid = valid;
+		this.statuses_count = statusesCount;
 	}
 	
 	//////// PUBLIC HELPERS ////////
 	
-	public void initializeDrawable() {
+	public Drawable initializeDrawable() {
 		try {
-    		URL url = new URL(this.avatar);
+    		URL url = new URL(this.profile_image_url);
     		InputStream is = (InputStream)url.getContent();
-    		this.avatarImage = Drawable.createFromStream(is, this.name);
+    		this.profileImage = Drawable.createFromStream(is, this.name);
     	} catch (Exception e) {
-    		this.avatarImage = null;
+    		this.profileImage = null;
     	}
+		return this.profileImage;
 	}
 }

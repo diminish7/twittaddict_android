@@ -35,8 +35,8 @@ public class Twittaddict {
 	private StatusService statusService;
 	
 	private TwitterUser twitterUser;
-	private List<TwitterUser> friends;
-	private List<TwitterStatus> statuses;
+	
+	private QuestionGenerator questionGenerator;
 	
 	private Long startTime;
 	private Integer score;
@@ -54,19 +54,12 @@ public class Twittaddict {
 		this.authenticator = new Authenticator(context, gameView);
 		this.userService = new UserService(context, this, authenticator);
 		this.statusService = new StatusService(context, this, authenticator);
+		this.questionGenerator = new QuestionGenerator(this);
 		initialize();
 	}
 	
 	public TwitterUser getTwitterUser() {
 		return this.twitterUser;
-	}
-	
-	public List<TwitterUser> getFriends() {
-		return this.friends;
-	}
-	
-	public List<TwitterStatus> getStatuses() {
-		return this.statuses;
 	}
 	
 	public boolean isErrored() {
@@ -139,6 +132,14 @@ public class Twittaddict {
 		return this.score;
 	}
 	
+	public Question getNextQuestion() {
+		if (isInProgress()) {
+			return questionGenerator.getNextQuestion();
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Registers a listener to be notified when something (like score) changes in the game
 	 * @param listener The listener to notify
@@ -187,7 +188,7 @@ public class Twittaddict {
 	 *         error messages in it
 	 */
 	private boolean queryGameData() {
-		return (queryUser() && queryFriends() && queryStatuses());
+		return (queryUser() && queryFriends() && queryStatuses() && initFirstFiveQuestions());
 	}
 	
 	private boolean queryUser() {
@@ -196,13 +197,20 @@ public class Twittaddict {
 	}
 	
 	private boolean queryFriends() {
-		friends = userService.getFriends(twitterUser);
+		List<TwitterUser> friends = userService.getFriends(twitterUser);
+		questionGenerator.setFriends(friends);
 		return (friends != null && !friends.isEmpty());
 	}
 	
 	private boolean queryStatuses() {
-		statuses = statusService.getHomeTimeline();
+		List<TwitterStatus> statuses = statusService.getHomeTimeline();
+		questionGenerator.setStatuses(statuses);
 		return (statuses != null && !statuses.isEmpty());
+	}
+	
+	private boolean initFirstFiveQuestions() {
+		questionGenerator.initFirstFiveQuestions();
+		return true;
 	}
 	
 	/**

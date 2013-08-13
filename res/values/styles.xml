@@ -1,20 +1,36 @@
-<resources>
-
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="AvatarName">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">80dip</item>
+        <item name="android:padding">5dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:maxLines">1</item>
     </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="AvatarContainer">
+		<item name="android:orientation">vertical</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:gravity">center</item>
+		<item name="android:background">@drawable/bubble</item>
+		<item name="android:padding">5dip</item>
+		<item name="android:layout_margin">5dip</item>
     </style>
-
+    <style name="AvatarView">
+	    <item name="android:layout_width">48dip</item>
+	    <item name="android:layout_height">48dip</item>
+    </style>
+    <style name="TweetContainer">
+    	<item name="android:layout_width">fill_parent</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:layout_margin">5dip</item>
+	    <item name="android:padding">10dip</item>
+	    <item name="android:gravity">center_vertical</item>
+	    <item name="android:background">@drawable/bubble</item>
+	    <item name="android:textColor">@color/grey</item>
+	    <item name="android:textSize">12sp</item>
+    </style>
 </resources>

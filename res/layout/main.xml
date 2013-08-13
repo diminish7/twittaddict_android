@@ -22,4 +22,9 @@
 	        android:layout_height="wrap_content"
 		    android:id="@+id/score_fragment" />
 	</LinearLayout>
+	<fragment
+        android:name="com.rushdevo.twittaddict.ui.fragments.QuestionFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+	    android:id="@+id/question_fragment" />
 </LinearLayout>
