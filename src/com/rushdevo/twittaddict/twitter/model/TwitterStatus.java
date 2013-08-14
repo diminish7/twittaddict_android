@@ -1,17 +1,8 @@
 package com.rushdevo.twittaddict.twitter.model;
 
-public class TwitterStatus {
-	private Long id;
+public class TwitterStatus extends BaseTwitterModel {
 	private String text;
 	private TwitterUser user;
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
 	
 	public String getText() {
 		return text;

@@ -3,6 +3,8 @@ package com.rushdevo.twittaddict.ui.fragments;
 import java.util.List;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +16,7 @@ import com.rushdevo.twittaddict.twitter.model.TwitterUser;
 /**
  * Container for User questions
  */
-public class UserQuestionFragment extends BaseQuestionFragment {
+public class UserQuestionFragment extends BaseQuestionFragment implements OnClickListener {
 	private ImageView userImage;
 	private TextView userName;
 	private TextView tweet1Container;
@@ -23,11 +25,16 @@ public class UserQuestionFragment extends BaseQuestionFragment {
 
 	@Override
 	public void initializeViews() {
+		// Set aside views
 		userImage = (ImageView)getContainerView().findViewById(R.id.user);
 		userName = (TextView)getContainerView().findViewById(R.id.userName);
 		tweet1Container = (TextView)getContainerView().findViewById(R.id.tweet1Container);
 		tweet2Container = (TextView)getContainerView().findViewById(R.id.tweet2Container);
 		tweet3Container = (TextView)getContainerView().findViewById(R.id.tweet3Container);
+		// Setup click listeners for answers
+		getContainerView().findViewById(R.id.tweet1Container).setOnClickListener(this);
+		getContainerView().findViewById(R.id.tweet2Container).setOnClickListener(this);
+		getContainerView().findViewById(R.id.tweet3Container).setOnClickListener(this);
 	}
 	
 	@Override
@@ -51,6 +58,21 @@ public class UserQuestionFragment extends BaseQuestionFragment {
 		setStatus(q.getStatuses(), 0, tweet1Container);
 		setStatus(q.getStatuses(), 1, tweet2Container);
 		setStatus(q.getStatuses(), 2, tweet3Container);
+	}
+	
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.tweet1Container:
+			selectAnswer(0);
+			break;
+		case R.id.tweet2Container:
+			selectAnswer(1);
+			break;
+		case R.id.tweet3Container:
+			selectAnswer(2);
+			break;
+		}
 	}
 	
 	private void setUser(TwitterUser user) {

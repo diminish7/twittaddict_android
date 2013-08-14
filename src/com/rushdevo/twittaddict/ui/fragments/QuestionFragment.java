@@ -16,6 +16,8 @@ import com.rushdevo.twittaddict.Twittaddict;
  * Main question container
  */
 public class QuestionFragment extends Fragment implements GameChangeListener {
+	private Twittaddict game;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.question, container, false);
@@ -36,7 +38,12 @@ public class QuestionFragment extends Fragment implements GameChangeListener {
 	}
 	
 	public void setGame(Twittaddict game) {
+		this.game = game;
 		game.registerGameChangeListener(this);
+	}
+	
+	public Twittaddict getGame() {
+		return this.game;
 	}
 	
 	//// PRIVATE HELPERS ///////
@@ -48,6 +55,7 @@ public class QuestionFragment extends Fragment implements GameChangeListener {
 		if (question != null) {
 			BaseQuestionFragment fragment = question.getFragment();
 			fragment.setQuestion(question);
+			fragment.setGame(getGame());
 			FragmentTransaction transaction = getFragmentManager().beginTransaction();
 			transaction.replace(R.id.question_container, fragment);
 			transaction.commit();

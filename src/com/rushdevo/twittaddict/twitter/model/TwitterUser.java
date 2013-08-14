@@ -5,7 +5,7 @@ import java.net.URL;
 
 import android.graphics.drawable.Drawable;
 
-public class TwitterUser {
+public class TwitterUser extends BaseTwitterModel {
 	
 	/////// PROPERTIES ////////
 	
@@ -14,7 +14,6 @@ public class TwitterUser {
 	private String profile_image_url;
 	private Drawable profileImage;
 	private String url;
-	private Long id;
 	private String description;
 	private Integer friends_count;
 	private Integer statuses_count;
@@ -54,12 +53,6 @@ public class TwitterUser {
 	}
 	public void setUrl(String url) {
 		this.url = url;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public String getDescription() {
 		return description;

@@ -16,10 +16,12 @@ import com.rushdevo.twittaddict.ui.fragments.TweetQuestionFragment;
 public class TweetQuestion implements Question {
 	private TwitterStatus status;
 	private List<TwitterUser> users;
+	private TwitterUser answer;
 	
 	public TweetQuestion(TwitterStatus status, List<TwitterUser> users) {
 		this.status = status;
 		this.users = users;
+		this.answer = null;
 	}
 	
 	public TwitterStatus getStatus() {
@@ -32,26 +34,22 @@ public class TweetQuestion implements Question {
 	
 	@Override
 	public void setChoice(int index) {
-		// TODO Auto-generated method stub
-
+		this.answer = (users.size() > index) ? users.get(index) : null;
 	}
 
 	@Override
 	public boolean isCorrect() {
-		// TODO Auto-generated method stub
-		return false;
+		return isAnswered() && this.answer.equals(getCorrectUser());
 	}
 
 	@Override
 	public boolean isAnswered() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.answer != null;
 	}
 
 	@Override
 	public TwitterUser getCorrectUser() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.status.getUser();
 	}
 	
 	@Override

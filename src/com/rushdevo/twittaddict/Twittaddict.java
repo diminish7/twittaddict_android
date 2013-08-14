@@ -24,6 +24,9 @@ public class Twittaddict {
 	
 	private static final int GAME_LENGTH = 60; // 60 second game length
 	
+	private static final int CORRECT_ANSWER_SCORE = 10;
+	private static final int INCORRECT_ANSWER_SCORE = 5;
+	
 	private String state;
 	private User user;
 	private GameView gameView;
@@ -44,6 +47,7 @@ public class Twittaddict {
 	private List<String> errors;
 	
 	private List<GameChangeListener> gameChangeListeners;
+	private List<Question> answeredQuestions;
 	
 	public Twittaddict(GameView gameView) {
 		this.gameView = gameView;
@@ -55,6 +59,7 @@ public class Twittaddict {
 		this.userService = new UserService(context, this, authenticator);
 		this.statusService = new StatusService(context, this, authenticator);
 		this.questionGenerator = new QuestionGenerator(this);
+		this.answeredQuestions = new ArrayList<Question>();
 		initialize();
 	}
 	
@@ -138,6 +143,19 @@ public class Twittaddict {
 		} else {
 			return null;
 		}
+	}
+	
+	public void logAnsweredQuestion(Question question) {
+		if (question != null && question.isAnswered()) {
+			answeredQuestions.add(question);
+			updateScore(question);
+			notifyGameChangeListeners();
+		}
+	}
+	
+	private void updateScore(Question question) {
+		if (question.isCorrect()) this.score += CORRECT_ANSWER_SCORE;
+		else this.score -= INCORRECT_ANSWER_SCORE;
 	}
 	
 	/**

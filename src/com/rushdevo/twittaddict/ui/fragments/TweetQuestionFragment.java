@@ -3,6 +3,8 @@ package com.rushdevo.twittaddict.ui.fragments;
 import java.util.List;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +16,7 @@ import com.rushdevo.twittaddict.twitter.model.TwitterUser;
 /**
  * Container for Tweet questions
  */
-public class TweetQuestionFragment extends BaseQuestionFragment {
+public class TweetQuestionFragment extends BaseQuestionFragment implements OnClickListener {
 	private TextView tweetContainer;
 	private ImageView user1;
 	private TextView user1Name;
@@ -25,6 +27,7 @@ public class TweetQuestionFragment extends BaseQuestionFragment {
 	
 	@Override
 	public void initializeViews() {
+		// Set aside views
 		tweetContainer = (TextView)getContainerView().findViewById(R.id.tweet_container);
 		user1 = (ImageView)getContainerView().findViewById(R.id.user1);
 		user1Name = (TextView)getContainerView().findViewById(R.id.user1Name);
@@ -32,6 +35,10 @@ public class TweetQuestionFragment extends BaseQuestionFragment {
 		user2Name = (TextView)getContainerView().findViewById(R.id.user2Name);
 		user3 = (ImageView)getContainerView().findViewById(R.id.user3);
 		user3Name = (TextView)getContainerView().findViewById(R.id.user3Name);
+		// Setup click listeners for answers
+		getContainerView().findViewById(R.id.user1Container).setOnClickListener(this);
+		getContainerView().findViewById(R.id.user2Container).setOnClickListener(this);
+		getContainerView().findViewById(R.id.user3Container).setOnClickListener(this);
 	}
 	
 	@Override
@@ -55,6 +62,21 @@ public class TweetQuestionFragment extends BaseQuestionFragment {
 		setUser(q.getUsers(), 0, user1, user1Name);
 		setUser(q.getUsers(), 1, user2, user2Name);
 		setUser(q.getUsers(), 2, user3, user3Name);
+	}
+	
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.user1Container:
+			selectAnswer(0);
+			break;
+		case R.id.user2Container:
+			selectAnswer(1);
+			break;
+		case R.id.user3Container:
+			selectAnswer(2);
+			break;
+		}
 	}
 	
 	private void setStatus(TwitterStatus status) {

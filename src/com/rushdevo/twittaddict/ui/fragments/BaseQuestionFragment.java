@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 
 import com.rushdevo.twittaddict.Question;
 import com.rushdevo.twittaddict.R;
+import com.rushdevo.twittaddict.Twittaddict;
 import com.rushdevo.twittaddict.twitter.model.TwitterUser;
 
 /**
  * Base class for the different types of question fragments (tweet question or user question)
  */
 public abstract class BaseQuestionFragment extends Fragment {
+	private Twittaddict game;
 	private Question question;
 	private View containerView;
 	
@@ -35,6 +37,14 @@ public abstract class BaseQuestionFragment extends Fragment {
 		refreshViewWithQuestionIfPossible();
 	}
 	
+	public Twittaddict getGame() {
+		return this.game;
+	}
+	
+	public void setGame(Twittaddict game) {
+		this.game = game;
+	}
+	
 	public View getContainerView() {
 		return this.containerView;
 	}
@@ -44,6 +54,15 @@ public abstract class BaseQuestionFragment extends Fragment {
 	 */
 	public void refreshViewWithQuestionIfPossible() {
 		if (this.question != null && this.containerView != null) refreshViewWithQuestion();
+	}
+	
+	/**
+	 * Select the answer to the fragment's question
+	 * @param index of the answer
+	 */
+	protected void selectAnswer(int index) {
+		getQuestion().setChoice(index);
+		getGame().logAnsweredQuestion(getQuestion());
 	}
 	
 	/**
