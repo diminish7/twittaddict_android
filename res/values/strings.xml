@@ -9,9 +9,20 @@
     <string name="loading_title">Loading...</string>
     <string name="loading_message">Think you know your Twitter friends?\n\nMatch the Tweets to the Tweeters to find out!</string>
     
+    <string name="loading_game_over_title">Game Over!</string>
+    <string name="loading_game_over_message">Loading Stats...</string>
+    
     <string name="start_time">60</string>
     <string name="start_score">0</string>
     
     <string name="score">Score:</string>
     <string name="correct">Correct!</string>
+    
+    <string name="game_over">Game Over!</string>
+    <string name="your_score">Your Score:</string>
+    <string name="high_scores">High Scores:</string>
+    <string name="play_again">Play Again</string>
+    <string name="high_score_tab">High Score</string>
+    <string name="bff_tab">Twitter BFF</string>
+    <string name="bff_label">\'s BFF is...</string>
 </resources>

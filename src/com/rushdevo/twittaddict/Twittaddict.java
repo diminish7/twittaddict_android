@@ -5,7 +5,10 @@ import java.util.List;
 
 import android.content.Context;
 
+import com.rushdevo.twittaddict.db.FriendStatsDataSource;
+import com.rushdevo.twittaddict.db.HighScoreDataSource;
 import com.rushdevo.twittaddict.db.UserDataSource;
+import com.rushdevo.twittaddict.db.model.FriendStats;
 import com.rushdevo.twittaddict.db.model.User;
 import com.rushdevo.twittaddict.twitter.Authenticator;
 import com.rushdevo.twittaddict.twitter.StatusService;
@@ -33,6 +36,8 @@ public class Twittaddict {
 	private Context context;
 	private Authenticator authenticator;
 	private UserDataSource userDataSource;
+	private FriendStatsDataSource friendStatDataSource;
+	private HighScoreDataSource highScoreDataSource;
 	
 	private UserService userService;
 	private StatusService statusService;
@@ -54,6 +59,8 @@ public class Twittaddict {
 		this.errors = new ArrayList<String>();
 		this.gameChangeListeners = new ArrayList<GameChangeListener>();
 		this.userDataSource = gameView.getUserDataSource();
+		this.friendStatDataSource = gameView.getFriendStatsDataSource();
+		this.highScoreDataSource = gameView.getHighScoreDataSource();
 		this.context = this.gameView.getApplicationContext();
 		this.authenticator = new Authenticator(context, gameView);
 		this.userService = new UserService(context, this, authenticator);
@@ -118,6 +125,7 @@ public class Twittaddict {
 	
 	public void complete() {
 		this.state = COMPLETE;
+		commitGameStats();
 		notifyGameChangeListeners();
 	}
 	
@@ -197,6 +205,14 @@ public class Twittaddict {
 		}
 	}
 	
+	public UserService getUserService() {
+		return this.userService;
+	}
+	
+	public StatusService getStatusService() {
+		return this.statusService;
+	}
+	
 	//////// PRIVATE HELPERS /////////
 	/**
 	 * Queries all game data from Twitter API
@@ -229,6 +245,23 @@ public class Twittaddict {
 	private boolean initFirstFiveQuestions() {
 		questionGenerator.initFirstFiveQuestions();
 		return true;
+	}
+	
+	/**
+	 * Upon completion of game, commit data to DB (friend stats, etc)
+	 */
+	private void commitGameStats() {
+		TwitterUser friend;
+		FriendStats friendStats;
+		// Update Friend Stats with answers from this game
+		for (Question question : answeredQuestions) {
+			friend = question.getCorrectUser();
+			friendStats = friendStatDataSource.getFriendStats(friend, user.getId());
+			if (friendStats == null) friendStatDataSource.createFriendStats(friend, user.getId(), question.isCorrect());
+			else friendStatDataSource.updateFriendStats(friendStats, question.isCorrect());
+		}
+		// Add this score to the list of high scores
+		highScoreDataSource.saveHighScore(user.getId(), getScore());
 	}
 	
 	/**

@@ -1,6 +1,8 @@
 package com.rushdevo.twittaddict.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,17 +11,19 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.rushdevo.twittaddict.GameChangeListener;
 import com.rushdevo.twittaddict.R;
 import com.rushdevo.twittaddict.Twittaddict;
 import com.rushdevo.twittaddict.db.FriendStatsDataSource;
 import com.rushdevo.twittaddict.db.HighScoreDataSource;
 import com.rushdevo.twittaddict.db.UserDataSource;
+import com.rushdevo.twittaddict.twitter.model.TwitterUser;
 import com.rushdevo.twittaddict.ui.GameView;
 import com.rushdevo.twittaddict.ui.fragments.ClockFragment;
 import com.rushdevo.twittaddict.ui.fragments.QuestionFragment;
 import com.rushdevo.twittaddict.ui.fragments.ScoreFragment;
 
-public class TwittaddictActivity extends SherlockFragmentActivity implements GameView {	
+public class TwittaddictActivity extends SherlockFragmentActivity implements GameView, GameChangeListener {	
 	private Twittaddict game;
 	private UserDataSource userDataSource;
 	private HighScoreDataSource highScoreDataSource;
@@ -48,6 +52,7 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 		friendStatsDataSource.open();
 		
 		game = new Twittaddict(this);
+		game.registerGameChangeListener(this);
 		
 		clockFragment = (ClockFragment)getSupportFragmentManager().findFragmentById(R.id.clock_fragment);
 		clockFragment.setGame(game);
@@ -124,6 +129,12 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 		return highScoreDataSource;
 	}
 	
+	/////////// GameChangeListener API ///
+	@Override
+	public void onGameChange(Twittaddict game) {
+		if (game.isComplete()) new GameCompleteTask(game, this).execute();
+	}
+	
 	/////////// INNER CLASSES ////////////
 	
 	/**
@@ -163,6 +174,44 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 			}
 			progressDialog.dismiss();
 			progressDialog = null;
+		}
+	}
+	
+	/**
+	 * Sets up data for the Game Over screen 
+	 */
+	private class GameCompleteTask extends AsyncTask<Void, Void, TwitterUser> {
+		private Twittaddict game;
+		private Context context;
+		
+		public GameCompleteTask(Twittaddict game, Context context) {
+			this.game = game;
+			this.context = context;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			String title = getResources().getString(R.string.loading_game_over_title);
+	    	String message = getResources().getString(R.string.loading_game_over_message);
+	    	progressDialog = ProgressDialog.show(TwittaddictActivity.this, title, message, true);
+		}
+		
+		@Override
+		protected TwitterUser doInBackground(Void... params) {
+    		Long id = friendStatsDataSource.getBffId();
+    		return game.getUserService().getUser(id);
+		}
+		
+		@Override
+		protected void onPostExecute(TwitterUser bff) {
+			Intent intent = new Intent(context, GameOverActivity.class);
+    		intent.putExtra("score", game.getScore());
+    		intent.putExtra("bffScreenName", (bff == null) ? "" : bff.getScreenName());
+    		intent.putExtra("bffProfileImageUrl", (bff == null) ? "" : bff.getProfileImageUrl());
+			startActivity(intent);
+			progressDialog.dismiss();
+			progressDialog = null;
+			finish();
 		}
 	}
 }

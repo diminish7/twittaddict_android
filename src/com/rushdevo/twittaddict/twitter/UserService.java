@@ -46,6 +46,18 @@ public class UserService extends AbstractTwitterService {
 	}
 	
 	/**
+	 * Calls Twitter API to find a user by id
+	 * @return The user
+	 */
+	public TwitterUser getUser(Long id) {
+		StringBuilder builder = new StringBuilder(USERS_LOOKUP_URL);
+		builder.append("?user_id=");
+		builder.append(id);
+		List<TwitterUser> users = getGson().fromJson(getResponseBody(builder.toString()), TWITTER_USER_COLLECTION_TYPE);
+		return users.isEmpty() ? null : users.get(0);
+	}
+	
+	/**
 	 * Calls Twitter API to find the IDs of the user's friends
 	 * @param user The user whose friends we want to find
 	 * @return The list of IDs of all the user's friends

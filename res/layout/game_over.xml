@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_repeat"
+    >
+    <fragment
+        android:name="com.rushdevo.twittaddict.ui.fragments.GameOverScoreFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+	    android:layout_marginBottom="5dip"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginRight="20dip"
+	    android:id="@+id/game_over_score_fragment" />
+	<TabHost
+		android:id="@+id/tab_host"
+		android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="20dip"
+	  	android:layout_marginRight="20dip" >
+	    <TabWidget
+	    	android:id="@android:id/tabs"
+		    android:layout_width="fill_parent"
+		    android:layout_height="30dip"
+		    android:padding="0dip"
+		    android:layout_margin="0dip" />
+	    <FrameLayout
+	    	android:id="@android:id/tabcontent"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content" >
+	     	<fragment
+	     	    android:name="com.rushdevo.twittaddict.ui.fragments.GameOverHighScoreFragment"
+	     	    android:layout_width="fill_parent"
+	     	    android:layout_height="fill_parent"
+	     	    android:id="@+id/game_over_high_score_fragment" />
+	     	<fragment
+	     	    android:name="com.rushdevo.twittaddict.ui.fragments.GameOverBffFragment"
+	     	    android:layout_width="fill_parent"
+	     	    android:layout_height="fill_parent"
+	     	    android:id="@+id/game_over_bff_fragment" />
+	    </FrameLayout>
+    </TabHost>
+    <LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:gravity="bottom|center_horizontal">
+		<Button
+			android:id="@+id/play_again_button"
+		 	android:layout_width="fill_parent"
+		 	android:layout_height="wrap_content"
+		 	android:layout_marginLeft="80dip"
+		 	android:layout_marginRight="80dip"
+		 	android:textSize="18sp"
+		 	android:textColor="@color/dark_blue"
+		 	android:background="@drawable/button_bg"
+		 	android:text="@string/play_again" />
+	</LinearLayout>
+</LinearLayout>

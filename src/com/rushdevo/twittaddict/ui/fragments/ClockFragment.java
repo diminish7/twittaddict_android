@@ -40,6 +40,7 @@ public class ClockFragment extends Fragment {
 	
 	@Override
 	public void onPause() {
+		super.onPause();
 		if (timer != null) timer.cancel();
 	}
 	
@@ -74,7 +75,8 @@ public class ClockFragment extends Fragment {
 		
 		@Override
 		public void run() {
-			handler.sendEmptyMessage(game.getSecondsRemaining());
+			int seconds = game.getSecondsRemaining();
+			handler.sendEmptyMessage(seconds);
 		}
 	}
 	
@@ -86,7 +88,10 @@ public class ClockFragment extends Fragment {
 		public void handleMessage(Message msg) {
 			Integer seconds = msg.what;
 			clockContainer.setText(seconds.toString());
-			if (seconds == 0) timer.cancel();
+			if (seconds == 0) {
+				game.complete();
+				timer.cancel();
+			}
 			
 		}
 	};
