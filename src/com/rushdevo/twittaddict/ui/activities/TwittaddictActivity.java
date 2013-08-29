@@ -73,7 +73,7 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
 		friendStatsDataSource.close();
 		
 		if (game.isInProgress()) game.pause();
-		if (progressDialog != null) progressDialog.dismiss();
+		if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
 	}
 	
 	@Override
@@ -209,7 +209,7 @@ public class TwittaddictActivity extends SherlockFragmentActivity implements Gam
     		intent.putExtra("bffScreenName", (bff == null) ? "" : bff.getScreenName());
     		intent.putExtra("bffProfileImageUrl", (bff == null) ? "" : bff.getProfileImageUrl());
 			startActivity(intent);
-			progressDialog.dismiss();
+			if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
 			progressDialog = null;
 			finish();
 		}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.rushdevo.twittaddict.db.FriendStatsDataSource;
 import com.rushdevo.twittaddict.db.HighScoreDataSource;

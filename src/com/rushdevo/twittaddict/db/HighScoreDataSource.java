@@ -61,7 +61,7 @@ public class HighScoreDataSource {
 	public List<HighScore> getHighScores() {
 		List<HighScore> results = new ArrayList<HighScore>();
 		
-		Cursor cursor = database.query(HIGH_SCORES_TABLE_NAME, HIGH_SCORE_COLUMNS, null, null, null, null, "score DESC", "5");
+		Cursor cursor = database.query(HIGH_SCORES_TABLE_NAME, HIGH_SCORE_COLUMNS, null, null, null, null, "score DESC", "10");
 		while (cursor.moveToNext()) {
 			results.add(cursorToHighScore(cursor));
 		}

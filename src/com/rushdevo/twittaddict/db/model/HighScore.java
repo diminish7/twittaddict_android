@@ -55,4 +55,10 @@ public class HighScore extends AbstractModel {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
+	
+	public boolean equals(Object other) {
+		if (other == null) return false;
+		if (!(other instanceof HighScore)) return false;
+		return ((HighScore)other).getId().equals(getId());
+	}
 }
