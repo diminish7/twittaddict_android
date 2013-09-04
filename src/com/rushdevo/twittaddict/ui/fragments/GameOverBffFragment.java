@@ -40,6 +40,7 @@ public class GameOverBffFragment extends Fragment {
     		bffAvatar = Drawable.createFromStream(is, bffScreenName);
     		bffAvatarView.setImageDrawable(bffAvatar);
     	} catch (Exception e) {
+    		bffAvatarView.setImageDrawable(getResources().getDrawable(R.drawable.default_avatar));
     		Log.d("GameOverBffFragment", e.getMessage());
     	}
 	}
